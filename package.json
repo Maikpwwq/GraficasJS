@@ -1,0 +1,23 @@
+{
+  "name": "GraficasJS",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maikpwwq/GraficasJS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Maikpwwq/GraficasJS/issues"
+  },
+  "homepage": "https://github.com/Maikpwwq/GraficasJS#readme",
+  "dependencies": {
+    "moment": "^2.27.0"
+  }
+}
