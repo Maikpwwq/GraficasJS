@@ -6,40 +6,50 @@
     <title>Graficas Js</title>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="moment.js"></script>
-    <script type="text/javascript">    
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-
-        var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['Work',     11],
-          ['Eat',      2],
-          ['Commute',  2],
-          ['Watch TV', 2],
-          ['Sleep',    7]
-        ]);
-
-        var options = {
-          title: 'My Daily Activities'
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-        chart.draw(data, options);
-      }
-    </script>
+    <script type="text/javascript" src="jQuerry.js"></script>
 </head>
 <body>
     <main>        
         <p>Google Chart Ejemplo</p> 
-        <div id="piechart" style="width: 600px; height: 300px;"></div>
+        <div id="piechart" style="width: 600px; height: 300px;"></div>        
     </main>
-    <script>
+    <script type="text/javascript">
+          /* 
+          url : "https://api.mapbox.com",
+          */
+        var moves;
         
-        console.log("Mi cumpleaños es el:"+ moment("02 21 1993").format("MMM Do YYYY"));  
-    
+        $.ajax({                    
+          url: "https://pokeapi.co/api/v2/pokemon/pikachu",          
+          success: function ( result ) {
+            console.log(result);
+            console.log(result.moves.length);
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);      
+            function drawChart () {
+              var chart = new google.visualization.PieChart(document.getElementById('piechart'));            
+            }
+            data : google.visualization.arrayToDataTable([
+                ['Task', 'Hours per Day'],
+                [result.stats[0].stat.name, result.stats[0].base_stat],
+                [result.stats[1].stat.name, result.stats[1].base_stat],
+                [result.stats[2].stat.name, result.stats[2].base_stat],
+                [result.stats[3].stat.name, result.stats[3].base_stat],
+                [result.stats[4].stat.name, result.stats[4].base_stat]
+            ]);
+            options : {
+                title: 'Pokemon Go'
+            };            
+            new Chart(chart.draw,{data, options});       
+
+            var img = document.createElement('img');
+                img.setAttribute('src',result.sprites.front_default);
+                document.body.appendChild(img);
+          }            
+        })        
+        var bithday = moment("1993 02 21").format('dddd DD ' +' of ' + 'MMMM YYYY'); 
+        document.write("Mi cumpleaños es el:"+ bithday.toString())
+        console.log("Mi cumpleaños es el:"+ bithday.toString()) 
     </script>    
 </body>
 </html>
