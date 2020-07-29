@@ -25,23 +25,28 @@
             console.log(result);
             console.log(result.moves.length);
             google.charts.load('current', {'packages':['corechart']});
-            google.charts.setOnLoadCallback(drawChart);      
+            google.charts.setOnLoadCallback(drawChart);    
+            
             function drawChart () {
-              var chart = new google.visualization.PieChart(document.getElementById('piechart'));            
-            }
-            data : google.visualization.arrayToDataTable([
+
+              var data = google.visualization.arrayToDataTable([
                 ['Task', 'Hours per Day'],
                 [result.stats[0].stat.name, result.stats[0].base_stat],
                 [result.stats[1].stat.name, result.stats[1].base_stat],
                 [result.stats[2].stat.name, result.stats[2].base_stat],
                 [result.stats[3].stat.name, result.stats[3].base_stat],
                 [result.stats[4].stat.name, result.stats[4].base_stat]
-            ]);
-            options : {
-                title: 'Pokemon Go'
-            };            
-            new Chart(chart.draw,{data, options});       
-
+              ]);
+              var options = {
+                  title: 'Pokemon Go'
+              };    
+                                    
+              var chart = new google.visualization.PieChart(document.getElementById('piechart'));            
+              chart.draw(data, options);
+              /*new Chart(chart.draw,{data, options});*/
+            }
+                 
+            drawChart;                 
             var img = document.createElement('img');
                 img.setAttribute('src',result.sprites.front_default);
                 document.body.appendChild(img);
